@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
+using System.Xml.Linq;
 
 namespace PrimeChartDemo
 {
@@ -20,7 +21,7 @@ namespace PrimeChartDemo
       tabControl1.SelectedIndex = 3;
     }
 
-    private void buttonCreateChartDynamically_Click(object sender, EventArgs e)
+    private void ButtonCreateChartDynamically_Click(object sender, EventArgs e)
     {
       // Create a Chart
       chart1 = new Chart();
@@ -66,7 +67,7 @@ namespace PrimeChartDemo
 
     }
 
-    private void buttonFeedPrimeChart_Click(object sender, EventArgs e)
+    private void ButtonFeedPrimeChart_Click(object sender, EventArgs e)
     {
       // Create Chart Area
       ChartArea chartArea2 = new ChartArea();
@@ -138,7 +139,7 @@ namespace PrimeChartDemo
           var sr = new StreamReader(fileName);
           while (!sr.EndOfStream)
           {
-            listPrimes.Add(int.Parse(sr.ReadLine()));
+            listPrimes.Add(int.Parse(sr.ReadLine().Trim()));
           }
 
           sr.Close();
@@ -152,7 +153,7 @@ namespace PrimeChartDemo
       //counting dizaines
       Dictionary<int, int> dizaines = new Dictionary<int, int>();
       dizaines = InitDizaineDico(listPrimes[listPrimes.Count - 1]);
-      dizaines = CountPrimeNumber(listPrimes, dizaines);
+      dizaines = CountPrimeNumberDizaine(listPrimes);
       foreach (var item in dizaines)
       {
         series3.Points.Add(item.Value);
@@ -162,13 +163,12 @@ namespace PrimeChartDemo
       chartDizaines.Series.Add(series3);
     }
 
-    private Dictionary<int, int> CountPrimeNumber(List<int> listPrimes, Dictionary<int, int> dizaines)
+    public Dictionary<int, int> CountPrimeNumberDizaine(List<int> listOfPrimes)
     {
-      Dictionary<int, int> resultDico = new Dictionary<int, int>();
-      resultDico = dizaines;
-      foreach (int number in listPrimes)
+      var resultDico = new Dictionary<int, int>();
+      foreach (int number in listOfPrimes)
       {
-        int dizaine = Math.Abs(number / 10);
+        int dizaine = Math.Abs(number / 10) + 1;
         if (resultDico.ContainsKey(dizaine))
         {
           resultDico[dizaine]++;
@@ -177,13 +177,12 @@ namespace PrimeChartDemo
         {
           resultDico.Add(dizaine, 1);
         }
-        
       }
 
       return resultDico;
     }
 
-    private Dictionary<int, int> InitDizaineDico(int maxNumber)
+    public Dictionary<int, int> InitDizaineDico(int maxNumber)
     {
       Dictionary<int, int> resultDico = new Dictionary<int, int>();
       for (int i = 0; i < maxNumber / 10; i++)

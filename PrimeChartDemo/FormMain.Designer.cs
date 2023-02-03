@@ -69,7 +69,7 @@
       this.buttonCreateChartDynamically.TabIndex = 0;
       this.buttonCreateChartDynamically.Text = "Create chart dynamically";
       this.buttonCreateChartDynamically.UseVisualStyleBackColor = true;
-      this.buttonCreateChartDynamically.Click += new System.EventHandler(this.buttonCreateChartDynamically_Click);
+      this.buttonCreateChartDynamically.Click += new System.EventHandler(this.ButtonCreateChartDynamically_Click);
       // 
       // chartPrimeDistribution
       // 
@@ -101,7 +101,7 @@
       this.buttonFeedPrimeChart.TabIndex = 2;
       this.buttonFeedPrimeChart.Text = "Feed Chart ";
       this.buttonFeedPrimeChart.UseVisualStyleBackColor = true;
-      this.buttonFeedPrimeChart.Click += new System.EventHandler(this.buttonFeedPrimeChart_Click);
+      this.buttonFeedPrimeChart.Click += new System.EventHandler(this.ButtonFeedPrimeChart_Click);
       // 
       // tabControl1
       // 
