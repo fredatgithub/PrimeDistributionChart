@@ -166,9 +166,18 @@ namespace PrimeChartDemo
     {
       Dictionary<int, int> resultDico = new Dictionary<int, int>();
       resultDico = dizaines;
-      foreach (int item in listPrimes)
+      foreach (int number in listPrimes)
       {
-        resultDico[item / 10]++;
+        int dizaine = Math.Abs(number / 10);
+        if (resultDico.ContainsKey(dizaine))
+        {
+          resultDico[dizaine]++;
+        }
+        else
+        {
+          resultDico.Add(dizaine, 1);
+        }
+        
       }
 
       return resultDico;
